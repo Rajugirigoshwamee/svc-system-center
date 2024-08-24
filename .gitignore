@@ -8,3 +8,14 @@
 /svd-system-center/svc.system.center.business.layer/obj
 /svd-system-center/svc.system.center.data.access.layer/obj
 /svd-system-center/svc.system.center.domain/obj
+/svc-system-center/.vs
+/svc-system-center/svc.system.center.api/bin/Debug/net8.0
+/svc-system-center/svc.system.center.api/obj
+/svc-system-center/svc.system.center.business.layer/bin/Debug/net8.0
+/svc-system-center/svc.system.center.business.layer/obj
+/svc-system-center/svc.system.center.data.access.layer/bin/Debug/net8.0
+/svc-system-center/svc.system.center.data.access.layer/obj
+/svc-system-center/svc.system.center.domain/bin/Debug/net8.0
+/svc-system-center/svc.system.center.domain/obj
+/svc-system-center/svc.system.center.migration/bin/Debug/net8.0
+/svc-system-center/svc.system.center.migration/obj

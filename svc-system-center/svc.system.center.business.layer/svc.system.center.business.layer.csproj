@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Scrutor" Version="4.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\svc.system.center.domain\svc.system.center.domain.csproj" />
+    <ProjectReference Include="..\svc.system.center.migration\svc.system.center.migration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="svc.birdcage.entity">
+      <HintPath>..\..\..\svc-birdcage\svc.birdcage.entity\bin\Debug\net8.0\svc.birdcage.entity.dll</HintPath>
+    </Reference>
+    <Reference Include="svc.birdcage.model">
+      <HintPath>..\..\..\svc-birdcage\svc.birdcage.model\bin\Debug\net8.0\svc.birdcage.model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

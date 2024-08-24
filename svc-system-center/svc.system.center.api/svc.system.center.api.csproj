@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\svc.system.center.business.layer\svc.system.center.business.layer.csproj" />
+    <ProjectReference Include="..\svc.system.center.data.access.layer\svc.system.center.data.access.layer.csproj" />
+    <ProjectReference Include="..\svc.system.center.domain\svc.system.center.domain.csproj" />
+    <ProjectReference Include="..\svc.system.center.migration\svc.system.center.migration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="svc.birdcage.entity">
+      <HintPath>..\..\..\svc-birdcage\svc.birdcage.entity\bin\Debug\net8.0\svc.birdcage.entity.dll</HintPath>
+    </Reference>
+    <Reference Include="svc.birdcage.model">
+      <HintPath>..\..\..\svc-birdcage\svc.birdcage.model\bin\Debug\net8.0\svc.birdcage.model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
