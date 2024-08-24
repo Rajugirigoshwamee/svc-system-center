@@ -13,7 +13,8 @@
 
 global using svc.birdcage.entity.Masters;
 global using svc.birdcage.model.Implementation;
+global using svc.system.center.domain.Commands.Country;
+global using svc.system.center.domain.Interfaces.Assemblers.Public;
 global using svc.system.center.domain.Interfaces.Repositories;
-global using svc.system.center.migration;
 
 #endregion

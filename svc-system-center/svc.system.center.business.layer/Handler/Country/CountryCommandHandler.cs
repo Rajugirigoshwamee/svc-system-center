@@ -1,18 +1,25 @@
-﻿namespace svc.system.center.business.layer.Handler.Country;
+﻿using svc.system.center.domain.Interfaces.Assemblers.Public;
+
+namespace svc.system.center.business.layer.Handler.Country;
 
 public class CountryCommandHandler: ICommandHandler<AddCountryCommand, bool>
 {
     public ICountryRepository _countryRepository { get; set; }
-    public CountryCommandHandler(ICountryRepository countryRepository)
+    public ICountryAssembler _countryAssembler { get; set; }
+    
+    public CountryCommandHandler(
+        ICountryRepository countryRepository,
+        ICountryAssembler countryAssembler
+        )
     {
         _countryRepository = countryRepository;
+        _countryAssembler = countryAssembler;
     }
+
     public async Task<bool> Handle(AddCountryCommand command)
     {
-        _countryRepository.Add(new Countries()
-        {
-            Name = "hi"
-        });
+        var country = _countryAssembler.WriteEntity(command);
+        await _countryRepository.AddAsync(country);
         return true;
     }
 }

@@ -51,6 +51,7 @@ builder.AddConfigurations();
 
 builder.Services.AddRepsoitoryExtension();
 builder.Services.AddCommandHandlerExtension();
+builder.Services.AddAssemblerExtension();
 
 #endregion
 

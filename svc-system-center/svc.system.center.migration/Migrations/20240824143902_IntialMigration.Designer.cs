@@ -12,7 +12,7 @@ using svc.system.center.migration.DbContexts;
 namespace svc.system.center.migration.Migrations
 {
     [DbContext(typeof(MasterDbContext))]
-    [Migration("20240824114930_IntialMigration")]
+    [Migration("20240824143902_IntialMigration")]
     partial class IntialMigration
     {
         /// <inheritdoc />
@@ -71,22 +71,19 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.HasIndex("CreateDate")
-                        .IsUnique();
+                    b.HasIndex("CreateDate");
 
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ModifiedBy");
 
                     b.HasIndex("ModifiedDate");
 
-                    b.HasIndex("RoleName")
-                        .IsUnique();
+                    b.HasIndex("RoleName");
 
                     b.HasIndex("TenantId");
 
@@ -177,15 +174,13 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.HasIndex("CreateDate")
-                        .IsUnique();
+                    b.HasIndex("CreateDate");
 
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ModifiedBy");
 
@@ -229,8 +224,7 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("RoleId");
 
@@ -298,15 +292,13 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.HasIndex("CreateDate")
-                        .IsUnique();
+                    b.HasIndex("CreateDate");
 
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ModifiedBy");
 
@@ -369,15 +361,13 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.HasIndex("CreateDate")
-                        .IsUnique();
+                    b.HasIndex("CreateDate");
 
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ModifiedBy");
 
@@ -396,6 +386,10 @@ namespace svc.system.center.migration.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("CreateBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -411,8 +405,16 @@ namespace svc.system.center.migration.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FlagUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("MobileCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
@@ -432,15 +434,13 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.HasIndex("CreateDate")
-                        .IsUnique();
+                    b.HasIndex("CreateDate");
 
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ModifiedBy");
 
@@ -505,15 +505,13 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.HasIndex("CreateDate")
-                        .IsUnique();
+                    b.HasIndex("CreateDate");
 
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ModifiedBy");
 
@@ -571,15 +569,13 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.HasIndex("CreateDate")
-                        .IsUnique();
+                    b.HasIndex("CreateDate");
 
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
 
-                    b.HasIndex("IsDeleted")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ModifiedBy");
 

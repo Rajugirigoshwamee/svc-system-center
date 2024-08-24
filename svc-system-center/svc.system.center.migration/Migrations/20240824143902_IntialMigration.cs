@@ -76,6 +76,9 @@ namespace svc.system.center.migration.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FlagUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -412,8 +415,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Areas_CreateDate",
                 table: "Areas",
-                column: "CreateDate",
-                unique: true);
+                column: "CreateDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Areas_DeletedBy",
@@ -428,8 +430,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Areas_IsDeleted",
                 table: "Areas",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Areas_ModifiedBy",
@@ -464,8 +465,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CreateDate",
                 table: "Cities",
-                column: "CreateDate",
-                unique: true);
+                column: "CreateDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_DeletedBy",
@@ -480,8 +480,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_IsDeleted",
                 table: "Cities",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_ModifiedBy",
@@ -511,8 +510,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Countries_CreateDate",
                 table: "Countries",
-                column: "CreateDate",
-                unique: true);
+                column: "CreateDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Countries_DeletedBy",
@@ -527,8 +525,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Countries_IsDeleted",
                 table: "Countries",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Countries_ModifiedBy",
@@ -559,8 +556,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Languages_CreateDate",
                 table: "Languages",
-                column: "CreateDate",
-                unique: true);
+                column: "CreateDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Languages_DeletedBy",
@@ -575,8 +571,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Languages_IsDeleted",
                 table: "Languages",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Languages_ModifiedBy",
@@ -601,8 +596,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_CreateDate",
                 table: "Roles",
-                column: "CreateDate",
-                unique: true);
+                column: "CreateDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_DeletedBy",
@@ -617,8 +611,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_IsDeleted",
                 table: "Roles",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_ModifiedBy",
@@ -633,8 +626,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_RoleName",
                 table: "Roles",
-                column: "RoleName",
-                unique: true);
+                column: "RoleName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_TenantId",
@@ -654,8 +646,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_States_CreateDate",
                 table: "States",
-                column: "CreateDate",
-                unique: true);
+                column: "CreateDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_DeletedBy",
@@ -670,8 +661,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_States_IsDeleted",
                 table: "States",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_ModifiedBy",
@@ -702,8 +692,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CreateDate",
                 table: "Users",
-                column: "CreateDate",
-                unique: true);
+                column: "CreateDate");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_DeletedBy",
@@ -718,8 +707,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Users_IsDeleted",
                 table: "Users",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_ModifiedBy",
@@ -755,8 +743,7 @@ namespace svc.system.center.migration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_UsersRoles_IsDeleted",
                 table: "UsersRoles",
-                column: "IsDeleted",
-                unique: true);
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersRoles_RoleId",
