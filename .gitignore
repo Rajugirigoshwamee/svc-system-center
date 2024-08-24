@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/svd-system-center/.vs/svd-system-center
+/svd-system-center/svc.system.center.api/obj
+/svd-system-center/svc.system.center.business.layer/obj
+/svd-system-center/svc.system.center.data.access.layer/obj
+/svd-system-center/svc.system.center.domain/obj
