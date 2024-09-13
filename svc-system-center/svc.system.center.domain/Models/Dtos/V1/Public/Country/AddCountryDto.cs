@@ -1,4 +1,4 @@
-﻿namespace svc.system.center.domain.Models.Dtos.V1.Public;
+﻿namespace svc.system.center.domain.Models.Dtos.V1.Public.Country;
 
 public class AddCountryDto
 {

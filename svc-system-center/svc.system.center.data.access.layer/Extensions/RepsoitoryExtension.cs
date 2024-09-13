@@ -1,4 +1,6 @@
-﻿using svc.system.center.data.access.layer.Repository;
+﻿using svc.birdcage.model.Implementation.Dapper;
+using svc.birdcage.model.Interfaces.Dapper;
+using svc.system.center.data.access.layer.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

@@ -1,5 +1,8 @@
-﻿namespace svc.system.center.domain.Interfaces.Repositories;
+﻿using svc.system.center.domain.Models.Dtos.V1.Public.Country;
+
+namespace svc.system.center.domain.Interfaces.Repositories;
 
 public interface ICountryRepository : IRepository<Countries>
 {
+    public Task<IEnumerable<GetCountryDto>> GetCountryListWithPagination();
 }

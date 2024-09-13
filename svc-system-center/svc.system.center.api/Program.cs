@@ -66,7 +66,7 @@ builder.Services.AddApiVersioning(x =>
 {
     x.DefaultApiVersion = new ApiVersion(1, 0);
     x.AssumeDefaultVersionWhenUnspecified = false;
-    x.ReportApiVersions = true;
+    x.ReportApiVersions = false;
     x.ErrorResponses = new DefaultErrorResponseProvider();
 });
 builder.Services.AddEndpointsApiExplorer();

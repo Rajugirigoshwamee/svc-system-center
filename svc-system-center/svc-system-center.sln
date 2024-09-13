@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "svc.system.center.data.acce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "svc.system.center.domain", "svc.system.center.domain\svc.system.center.domain.csproj", "{E6635431-FCBE-4497-A716-685FF1AF0FB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "svc.system.center.migration", "svc.system.center.migration\svc.system.center.migration.csproj", "{E559050E-4445-4452-956B-4800C0FDF405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "svc.system.center.migration", "svc.system.center.migration\svc.system.center.migration.csproj", "{E559050E-4445-4452-956B-4800C0FDF405}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
