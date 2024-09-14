@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
+using svc.system.center.api.Helpers;
 
 var EnveriometnName = string.Empty;
 
@@ -80,6 +81,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+#region Seed Helper
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+    var myDependency = services.GetRequiredService<SeedHelper>();
+    myDependency.Seed().Wait();
+}
+
+#endregion
 
 app.UseHttpsRedirection();
 
