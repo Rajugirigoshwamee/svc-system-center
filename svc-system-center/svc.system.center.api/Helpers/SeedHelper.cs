@@ -22,9 +22,9 @@ namespace svc.system.center.api.Helpers
             string[] sqlFilesPaths = Directory.GetFiles("./Migrations/SP_Migration", "*.sql", SearchOption.TopDirectoryOnly);
             foreach (string sqlFilePath in sqlFilesPaths)
             {
-                string text = File.ReadAllText(sqlFilePath);
+                string sql = File.ReadAllText(sqlFilePath);
 
-                await DapperService.AddOrUpdateAsync<dynamic>("", new { });
+                await DapperService.AddOrUpdateAsync<dynamic>(sql, new { }, type: System.Data.CommandType.Text);
             }
         }
 

@@ -2,6 +2,7 @@
 using svc.birdcage.model.Commands;
 using svc.birdcage.model.Consts;
 using svc.system.center.api.Controllers.Comman;
+using svc.system.center.api.Filters;
 using svc.system.center.domain.Commands.Country;
 using svc.system.center.domain.Interfaces.Assemblers.Public;
 using svc.system.center.domain.Interfaces.Repositories;
@@ -10,6 +11,7 @@ using svc.system.center.domain.Models.Dtos.V1.Public.Country;
 namespace svc.system.center.api.Controllers.V1.Public;
 
 [ApiVersion(ApiVersionConst.ApiVersionOne)]
+[AuthorizationFilter]
 [Route("api/v{apiVersion:apiVersion}/[controller]")]
 public class CountryController : BaseController
 {

@@ -13,12 +13,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="svc.birdcage.entity">
-      <HintPath>..\..\..\svc-birdcage\svc.birdcage.entity\bin\Debug\net8.0\svc.birdcage.entity.dll</HintPath>
-    </Reference>
+    <PackageReference Include="svc.birdcage.entity" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

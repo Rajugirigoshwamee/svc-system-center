@@ -15,6 +15,8 @@ public class MasterDbContext : DbContext
     public virtual DbSet<Users> Users { get; set; }
     public virtual DbSet<Roles> Roles { get; set; }
     public virtual DbSet<UsersRoles> UsersRoles { get; set; }
+    public virtual DbSet<Permission> Permission { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
     }
