@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using svc.birdcage.model.Commands;
 using svc.birdcage.model.Consts;
 using svc.system.center.api.Controllers.Comman;
@@ -10,7 +11,7 @@ using svc.system.center.domain.Models.Dtos.V1.Public.Country;
 
 namespace svc.system.center.api.Controllers.V1.Public;
 
-[ApiVersion(ApiVersionConst.ApiVersionOne)]
+[ApiVersion("1.0")]
 [AuthorizationFilter]
 [Route("api/v{apiVersion:apiVersion}/[controller]")]
 public class CountryController : BaseController
@@ -33,7 +34,7 @@ public class CountryController : BaseController
     public async Task<IActionResult> Get()
     {
         var list =await _countryRepository.GetCountryListWithPagination();
-        return OkResponse();
+        return OkResponse(list);
     }
 
     [HttpPost]

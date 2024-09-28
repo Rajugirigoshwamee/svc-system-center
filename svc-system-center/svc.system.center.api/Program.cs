@@ -1,7 +1,5 @@
 #region Set Environment
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
 using svc.system.center.api.Helpers;
 
@@ -62,15 +60,19 @@ builder.AddContext();
 
 #endregion
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
 builder.Services.AddApiVersioning(x =>
 {
-    x.DefaultApiVersion = new ApiVersion(1, 0);
-    x.AssumeDefaultVersionWhenUnspecified = false;
-    x.ReportApiVersions = false;
-    x.ErrorResponses = new DefaultErrorResponseProvider();
+    x.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
+    x.AssumeDefaultVersionWhenUnspecified = true;
+    x.ReportApiVersions = true;
+}).AddApiExplorer(x =>
+{
+    x.GroupNameFormat = "'v'VVV";
+    x.SubstituteApiVersionInUrl = true;
 });
-builder.Services.AddEndpointsApiExplorer();
+
+
 
 #endregion
 

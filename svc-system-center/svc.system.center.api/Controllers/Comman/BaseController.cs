@@ -13,8 +13,12 @@ namespace svc.system.center.api.Controllers.Comman
 
         protected IActionResult OkResponse(object data) => Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully.", Data = data });
 
-        protected IActionResult OkResponse(IEnumerable<dynamic> details, int? pageSize)
+        protected IActionResult OkResponse<T>(IEnumerable<T> details, int? pageSize)
         {
+            BasePaginationResponse<T> pagination = new BasePaginationResponse<T>() {
+                Details=details,
+                Offset=
+            };
             int total = 0, totalPages = 0, offset = 0;
 
             if (pageSize == null) pageSize = 10;
