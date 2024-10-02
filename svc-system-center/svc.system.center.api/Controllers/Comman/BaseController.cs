@@ -1,37 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using svc.birdcage.model.Response.Base;
+using svc.system.center.api.Helpers;
 
 namespace svc.system.center.api.Controllers.Comman
 {
+    [EnableCors("CorsPolicy")]
     public class BaseController : ControllerBase
     {
         #region Ok Response
 
-        protected IActionResult OkResponse() => OkResponse("Your request submit successfully.");
+        protected IActionResult SuccessResponse() => SuccessResponse("Your request submit successfully.");
 
-        protected IActionResult OkResponse(string message) => Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully." });
+        protected IActionResult SuccessResponse(string message) => Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully." });
 
-        protected IActionResult OkResponse(object data) => Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully.", Data = data });
+        protected IActionResult SuccessResponse(object data) => Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully.", Data = data });
 
-        protected IActionResult OkResponse<T>(IEnumerable<T> details, int? pageSize)
+        protected IActionResult SuccessResponse(IEnumerable<dynamic> details, int? pageSize)
         {
-            BasePaginationResponse<T> pagination = new BasePaginationResponse<T>() {
-                Details=details,
-                Offset=
-            };
             int total = 0, totalPages = 0, offset = 0;
 
-            if (pageSize == null) pageSize = 10;
+            pageSize ??= 10;
 
-            if (details != null && details.Count() > 0)
+            if (details != null && details.Any())
             {
-                total = details.FirstOrDefault().Total;
-                totalPages = 10; //GenericHelper.CalculateTotalPages(total, pageSize);
-                offset = details.FirstOrDefault().OffSet;
+                total = details.FirstOrDefault()!.Total;
+                totalPages = GenericHelpers.CalculateTotalPages(total, pageSize);
+                offset = details.FirstOrDefault()!.Offset;
             }
+
             var data = new { total, totalPages, pageSize, offset, details };
 
-            return Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully.", Data = data });
+            Response.Headers.Append("X-Count", total.ToString());
+
+            return Ok(new BaseErrorResponse { Success = true, Message = "ok response request performed successfully", Data = data });
         }
 
         #endregion Ok Response

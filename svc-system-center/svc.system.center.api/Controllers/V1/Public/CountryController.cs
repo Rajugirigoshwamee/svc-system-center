@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using svc.birdcage.model.Commands;
 using svc.birdcage.model.Consts;
+using svc.birdcage.model.Request.Base;
+using svc.birdcage.model.Response.Base;
 using svc.system.center.api.Controllers.Comman;
 using svc.system.center.api.Filters;
 using svc.system.center.domain.Commands.Country;
@@ -31,16 +33,19 @@ public class CountryController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
-    {
-        var list =await _countryRepository.GetCountryListWithPagination();
-        return OkResponse(list);
+    public async Task<IActionResult> Get([FromQuery] BaseListRequestDto request)
+        {
+        var list = await _countryRepository.GetCountryListWithPagination(request);
+
+        return SuccessResponse(list, request.PageSize);
+
+
     }
 
     [HttpPost]
     public async Task<IActionResult> AddCountry([FromBody] AddCountryDto request)
     {
         await _commandHandler.Handle(new AddCountryCommand(request.Name, request.Description, request.Code, request.MobileCode, request.FlagUrl));
-        return OkResponse();
+        return SuccessResponse();
     }
 }

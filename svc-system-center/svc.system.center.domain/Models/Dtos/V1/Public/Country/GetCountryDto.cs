@@ -1,6 +1,8 @@
-﻿namespace svc.system.center.domain.Models.Dtos.V1.Public.Country;
+﻿using svc.birdcage.model.Response.Base;
 
-public class GetCountryDto
+namespace svc.system.center.domain.Models.Dtos.V1.Public.Country;
+
+public class GetCountryDto: BaseListResponseDto
 {
     public required string Name { get; set; }
     public required string Code { get; set; }

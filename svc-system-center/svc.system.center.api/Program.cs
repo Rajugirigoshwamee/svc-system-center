@@ -60,7 +60,35 @@ builder.AddContext();
 
 #endregion
 
-builder.Services.AddControllers().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
+#region Core Policy.
+
+builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+{
+
+#if DEBUG
+
+builder
+.WithOrigins("http://localhost:4200", "http://localhost", "http://localhost:19952", "http://localhost:8082")
+.AllowAnyMethod()
+.AllowAnyHeader()
+.AllowCredentials()
+ .WithExposedHeaders("X-Count");
+
+#elif STAGGING
+
+builder.WithOrigins("http://ibet333.com", "http://www.ibet333.com", "http://admin.ibet333.com:8082").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+
+#elif RELEASE 
+
+builder.WithOrigins("http://ibet333.com", "http://www.ibet333.com", "http://admin.ibet333.com:8082").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+
+#endif
+
+
+}));
+
+#endregion
+
 builder.Services.AddApiVersioning(x =>
 {
     x.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
@@ -72,6 +100,8 @@ builder.Services.AddApiVersioning(x =>
     x.SubstituteApiVersionInUrl = true;
 });
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
 
 #endregion
@@ -95,10 +125,13 @@ using (var serviceScope = app.Services.CreateScope())
 
 #endregion
 
+app.UseCors("CorsPolicy");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

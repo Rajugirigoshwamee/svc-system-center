@@ -10,17 +10,31 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	IF(@PageSize IS NULL)
+	BEGIN 
+		SELECT @PageSize=COUNT(C.Id) FROM [dbo].[Countries] C WITH(NOLOCK);
+	END
+
+	IF(@PageSize IS NULL)
+	BEGIN 
+		SET @PageNo=0;
+	END
+	 
+	DECLARE @Offset INT = (@PageNo * @PageSize);
+
     SELECT 
 		C.Name AS name,
 		C.Code AS code,
 		C.MobileCode AS MobileCode,
-		C.FlagUrl AS FlagUrl
+		C.FlagUrl AS FlagUrl,
+		COUNT(C.Id) OVER() AS Total,
+		@Offset AS Offset
 	FROM [dbo].[Countries] C WITH(NOLOCK)
 	WHERE 
 		C.IsDeleted=0
 		AND (@Id IS NULL OR C.Id = @Id)
 	ORDER BY 
 		C.Name
-	OFFSET @PageNo*@PageSize ROWS FETCH NEXT @PageSize ROWS ONLY
+	OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY
 
 END
