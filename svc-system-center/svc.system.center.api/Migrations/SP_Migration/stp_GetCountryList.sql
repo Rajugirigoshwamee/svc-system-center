@@ -27,8 +27,7 @@ BEGIN
 		C.Code AS code,
 		C.MobileCode AS MobileCode,
 		C.FlagUrl AS FlagUrl,
-		COUNT(C.Id) OVER() AS Total,
-		@Offset AS Offset
+		COUNT(C.Id) OVER() AS Total
 	FROM [dbo].[Countries] C WITH(NOLOCK)
 	WHERE 
 		C.IsDeleted=0

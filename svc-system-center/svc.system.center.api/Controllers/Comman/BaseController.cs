@@ -17,24 +17,19 @@ namespace svc.system.center.api.Controllers.Comman
 
         protected IActionResult SuccessResponse(object data) => Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully.", Data = data });
 
-        protected IActionResult SuccessResponse(IEnumerable<dynamic> details, int? pageSize)
+        protected IActionResult SuccessResponse(IEnumerable<dynamic> details)
         {
-            int total = 0, totalPages = 0, offset = 0;
+            int total = 0;
 
-            pageSize ??= 10;
 
             if (details != null && details.Any())
             {
                 total = details.FirstOrDefault()!.Total;
-                totalPages = GenericHelpers.CalculateTotalPages(total, pageSize);
-                offset = details.FirstOrDefault()!.Offset;
             }
-
-            var data = new { total, totalPages, pageSize, offset, details };
 
             Response.Headers.Append("X-Count", total.ToString());
 
-            return Ok(new BaseErrorResponse { Success = true, Message = "ok response request performed successfully", Data = data });
+            return Ok(details);
         }
 
         #endregion Ok Response

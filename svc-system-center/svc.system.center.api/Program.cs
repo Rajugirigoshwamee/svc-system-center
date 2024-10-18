@@ -3,23 +3,23 @@
 using Microsoft.OpenApi.Models;
 using svc.system.center.api.Helpers;
 
-var EnveriometnName = string.Empty;
+var EnveriomentName = string.Empty;
 
 #if DEBUG
 
-EnveriometnName = "Development";
+EnveriomentName = "Development";
 
 #elif STAGGING
 
-EnveriometnName = "Stagging";
+EnveriomentName = "Stagging";
 
 #elif RELEASE    
 
-EnveriometnName = "Production";
+EnveriomentName = "Production";
 
 #endif
 
-IConfiguration configuration = new ConfigurationBuilder().AddJsonFile($"appsettings.{EnveriometnName}.json").Build();
+IConfiguration configuration = new ConfigurationBuilder().AddJsonFile($"appsettings.{EnveriomentName}.json").Build();
 
 #endregion
 

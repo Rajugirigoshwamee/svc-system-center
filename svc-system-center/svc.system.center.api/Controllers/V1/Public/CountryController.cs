@@ -37,9 +37,7 @@ public class CountryController : BaseController
         {
         var list = await _countryRepository.GetCountryListWithPagination(request);
 
-        return SuccessResponse(list, request.PageSize);
-
-
+        return SuccessResponse(list);
     }
 
     [HttpPost]
