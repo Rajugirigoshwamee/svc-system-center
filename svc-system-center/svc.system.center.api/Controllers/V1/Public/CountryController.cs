@@ -1,9 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using svc.birdcage.model.Commands;
-using svc.birdcage.model.Consts;
 using svc.birdcage.model.Request.Base;
-using svc.birdcage.model.Response.Base;
 using svc.system.center.api.Controllers.Comman;
 using svc.system.center.api.Filters;
 using svc.system.center.domain.Commands.Country;
@@ -34,9 +32,8 @@ public class CountryController : BaseController
 
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] BaseListRequestDto request)
-        {
+    {
         var list = await _countryRepository.GetCountryListWithPagination(request);
-
         return SuccessResponse(list);
     }
 

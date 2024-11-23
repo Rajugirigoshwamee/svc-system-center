@@ -23,6 +23,7 @@ BEGIN
 	DECLARE @Offset INT = (@PageNo * @PageSize);
 
     SELECT 
+		C.Id as id,
 		C.Name AS name,
 		C.Code AS code,
 		C.MobileCode AS MobileCode,
