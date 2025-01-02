@@ -3,5 +3,11 @@
     public class DeleteCountryCommand
     {
         public Guid Id { get; set; }
+
+        public DeleteCountryCommand(Guid id)
+        {
+            Id = id;
+        }
+
     }
 }
