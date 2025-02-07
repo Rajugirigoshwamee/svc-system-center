@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using svc.birdcage.model.Implementation.Dapper;
 using svc.birdcage.model.Interfaces.Dapper;
+using svc.system.center.api.Filters;
 using svc.system.center.api.Helpers;
 using svc.system.center.migration.DbContexts;
 
@@ -14,6 +15,7 @@ public static class ContextExtensions
         builder.Services.AddDbContext<MasterDbContext>(context => context.UseSqlServer(connectionString));
         builder.Services.AddScoped<IDapperService>(x => new DapperServices(connectionString!));
         builder.Services.AddScoped<SeedHelper>();
+        builder.Services.AddScoped<ExceptionFilters>();
 
         return builder.Services;
     }

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using svc.birdcage.model.Response.Base;
-using svc.system.center.api.Helpers;
+using svc.system.center.api.Filters;
 
 namespace svc.system.center.api.Controllers.Comman
 {
     [EnableCors("CorsPolicy")]
+    [ServiceFilter(typeof(ExceptionFilters))]
     public class BaseController : ControllerBase
     {
         #region Ok Response

@@ -4,7 +4,8 @@ namespace svc.system.center.business.layer.Handler.Country;
 
 public class CountryCommandHandler : 
     ICommandHandler<AddCountryCommand, bool>,
-    ICommandHandler<DeleteCountryCommand, bool>
+    ICommandHandler<DeleteCountryCommand, bool>,
+    ICommandHandler<UpdateCountryCommand, bool>
 {
     public ICountryRepository _countryRepository { get; set; }
     public ICountryAssembler _countryAssembler { get; set; }
@@ -33,6 +34,13 @@ public class CountryCommandHandler :
             return false;
 
         await _countryRepository.DeleteAsync(deleteEntry);
+        return true;
+    }
+    
+    public async Task<bool> Handle(UpdateCountryCommand command)
+    {
+        var country = _countryAssembler.WriteEntity(command);
+        await _countryRepository.UpdateAsync(country);
         return true;
     }
 }

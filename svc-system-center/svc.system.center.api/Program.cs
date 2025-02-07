@@ -1,5 +1,6 @@
 #region Set Environment
 
+using Asp.Versioning;
 using Microsoft.OpenApi.Models;
 using svc.system.center.api.Helpers;
 
@@ -91,7 +92,7 @@ builder.WithOrigins("http://ibet333.com", "http://www.ibet333.com", "http://admi
 
 builder.Services.AddApiVersioning(x =>
 {
-    x.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
+    x.DefaultApiVersion = ApiVersion.Default;
     x.AssumeDefaultVersionWhenUnspecified = true;
     x.ReportApiVersions = true;
 }).AddApiExplorer(x =>

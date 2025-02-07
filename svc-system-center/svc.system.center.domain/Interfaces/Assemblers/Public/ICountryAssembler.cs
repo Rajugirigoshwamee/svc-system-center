@@ -6,5 +6,8 @@ namespace svc.system.center.domain.Interfaces.Assemblers.Public;
 public interface ICountryAssembler
 {
     Countries WriteEntity(AddCountryCommand command);
+
+    Countries WriteEntity(UpdateCountryCommand command);
+
     GetCountryDto WriteDTO(Countries command);
 }

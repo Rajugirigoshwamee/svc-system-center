@@ -1,13 +1,7 @@
 ﻿namespace svc.system.center.domain.Commands.Country
 {
-    public class DeleteCountryCommand
+    public class DeleteCountryCommand(Guid id)
     {
-        public Guid Id { get; set; }
-
-        public DeleteCountryCommand(Guid id)
-        {
-            Id = id;
-        }
-
+        public Guid Id { get; } = id;
     }
 }

@@ -20,4 +20,17 @@ public class CountryAssembler : ICountryAssembler
             MobileCode = command.MobileCode
         };
     }
+
+    public Countries WriteEntity(UpdateCountryCommand command)
+    {
+        return new Countries()
+        {
+            Id = command.Id,
+            Name = command.Name,
+            Description = command.Description,
+            Code = command.Code,
+            FlagUrl = command.FlagUrl,
+            MobileCode = command.MobileCode
+        };
+    }
 }
