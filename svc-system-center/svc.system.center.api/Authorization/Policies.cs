@@ -1,5 +1,5 @@
-﻿using svc.birdcage.entity.Authorization;
-using svc.birdcage.model.Consts;
+﻿using svc.birdcage.hawk.Consts;
+using svc.birdcage.parrot.Authorization;
 using svc.system.center.api.Controllers.V1.Public;
 
 namespace svc.system.center.api.Authorization

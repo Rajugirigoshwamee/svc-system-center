@@ -1,4 +1,5 @@
-﻿using svc.birdcage.model.Response.Base;
+﻿
+using svc.birdcage.hawk.Response.Base;
 
 namespace svc.system.center.domain.Models.Dtos.V1.Public.Country;
 

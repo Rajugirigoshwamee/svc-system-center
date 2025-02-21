@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using svc.birdcage.model.Response.Base;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace svc.system.center.api.Filters
 {

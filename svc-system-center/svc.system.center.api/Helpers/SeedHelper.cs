@@ -1,4 +1,4 @@
-﻿using svc.birdcage.model.Interfaces.Dapper;
+﻿using svc.birdcage.hawk.Interfaces.Dapper;
 
 namespace svc.system.center.api.Helpers
 {

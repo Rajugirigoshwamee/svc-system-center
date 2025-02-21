@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using svc.birdcage.model.Commands;
-using svc.birdcage.model.Request.Base;
-using svc.birdcage.model.Response.Base;
+using svc.birdcage.hawk.Commands;
+using svc.birdcage.hawk.Request.Base;
+using svc.birdcage.hawk.Response.Base;
 using svc.system.center.api.Controllers.Comman;
 using svc.system.center.api.Filters;
 using svc.system.center.domain.Commands.Country;

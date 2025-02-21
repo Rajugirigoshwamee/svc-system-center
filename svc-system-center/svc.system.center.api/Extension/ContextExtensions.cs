@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using svc.birdcage.model.Implementation.Dapper;
-using svc.birdcage.model.Interfaces.Dapper;
+using svc.birdcage.hawk.Implementation.Dapper;
+using svc.birdcage.hawk.Interfaces.Dapper;
 using svc.system.center.api.Filters;
 using svc.system.center.api.Helpers;
 using svc.system.center.migration.DbContexts;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using svc.birdcage.model.Response.Base;
+using svc.birdcage.hawk.Response.Base;
 using svc.system.center.api.Filters;
 
 namespace svc.system.center.api.Controllers.Comman

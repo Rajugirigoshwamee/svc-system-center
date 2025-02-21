@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using svc.birdcage.model.Response.Base;
+using svc.birdcage.hawk.Response.Base;
 
 namespace svc.system.center.api.Filters;
 

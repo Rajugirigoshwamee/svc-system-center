@@ -1,4 +1,8 @@
-﻿namespace svc.system.center.migration.DbContexts;
+﻿using Microsoft.EntityFrameworkCore;
+using svc.birdcage.parrot.Authorization;
+using svc.birdcage.parrot.Masters;
+
+namespace svc.system.center.migration.DbContexts;
 
 public class MasterDbContext : DbContext
 {
