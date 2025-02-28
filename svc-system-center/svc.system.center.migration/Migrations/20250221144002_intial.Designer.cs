@@ -12,23 +12,112 @@ using svc.system.center.migration.DbContexts;
 namespace svc.system.center.migration.Migrations
 {
     [DbContext(typeof(MasterDbContext))]
-    [Migration("20240824143902_IntialMigration")]
-    partial class IntialMigration
+    [Migration("20250221144002_intial")]
+    partial class intial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("svc.birdcage.entity.Authorization.Roles", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Branches", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Branches");
+                });
+
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Permission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreateBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CreateBy");
+
+                    b.HasIndex("CreateDate");
+
+                    b.HasIndex("DeletedBy");
+
+                    b.HasIndex("DeletedDate");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("ModifiedBy");
+
+                    b.HasIndex("ModifiedDate");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Permission");
+                });
+
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Roles", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreateBy")
@@ -69,6 +158,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CreateBy");
 
                     b.HasIndex("CreateDate");
@@ -90,7 +181,7 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Authorization.Tenant", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Tenant", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,10 +207,13 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("Tenant");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Authorization.Users", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Users", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreateBy")
@@ -172,6 +266,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CreateBy");
 
                     b.HasIndex("CreateDate");
@@ -194,10 +290,13 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Authorization.UsersRoles", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.UsersRoles", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("DeletedBy")
@@ -220,6 +319,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("DeletedBy");
 
                     b.HasIndex("DeletedDate");
@@ -235,10 +336,13 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("UsersRoles");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Areas", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Areas", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CityId")
@@ -286,6 +390,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CityId");
 
                     b.HasIndex("CountryId");
@@ -311,10 +417,13 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("Areas");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Cities", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Cities", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CountryId")
@@ -357,6 +466,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CountryId");
 
                     b.HasIndex("CreateBy");
@@ -380,10 +491,13 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Countries", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Countries", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -432,6 +546,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CreateBy");
 
                     b.HasIndex("CreateDate");
@@ -454,10 +570,13 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Languages", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Languages", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -503,6 +622,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CreateBy");
 
                     b.HasIndex("CreateDate");
@@ -522,10 +643,13 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("Languages");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.States", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.States", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CountryId")
@@ -565,6 +689,8 @@ namespace svc.system.center.migration.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("CountryId");
 
                     b.HasIndex("CreateBy");
@@ -586,23 +712,29 @@ namespace svc.system.center.migration.Migrations
                     b.ToTable("States");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Authorization.Roles", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Permission", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "CreateByFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
                         .WithMany()
                         .HasForeignKey("CreateBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "ModifiedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
                         .WithMany()
                         .HasForeignKey("ModifiedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("CreateByFK");
 
@@ -613,23 +745,29 @@ namespace svc.system.center.migration.Migrations
                     b.Navigation("TenantIdFK");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Authorization.Users", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Roles", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "CreateByFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
                         .WithMany()
                         .HasForeignKey("CreateBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "ModifiedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
                         .WithMany()
                         .HasForeignKey("ModifiedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("CreateByFK");
 
@@ -640,27 +778,66 @@ namespace svc.system.center.migration.Migrations
                     b.Navigation("TenantIdFK");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Authorization.UsersRoles", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.Users", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
+                        .WithMany()
+                        .HasForeignKey("CreateBy");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Roles", "RoleIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
+
+                    b.Navigation("CreateByFK");
+
+                    b.Navigation("DeletedByFk");
+
+                    b.Navigation("ModifiedByFk");
+
+                    b.Navigation("TenantIdFK");
+                });
+
+            modelBuilder.Entity("svc.birdcage.parrot.Authorization.UsersRoles", b =>
+                {
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
+                        .WithMany()
+                        .HasForeignKey("DeletedBy");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Roles", "RoleIdByFk")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "UserIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "UserIdByFk")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("DeletedByFk");
 
@@ -671,35 +848,41 @@ namespace svc.system.center.migration.Migrations
                     b.Navigation("UserIdByFk");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Areas", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Areas", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Masters.Cities", "CityIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Masters.Cities", "CityIdByFk")
                         .WithMany()
                         .HasForeignKey("CityId");
 
-                    b.HasOne("svc.birdcage.entity.Masters.Countries", "CountryIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Masters.Countries", "CountryIdByFk")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "CreateByFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
                         .WithMany()
                         .HasForeignKey("CreateBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "ModifiedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
                         .WithMany()
                         .HasForeignKey("ModifiedBy");
 
-                    b.HasOne("svc.birdcage.entity.Masters.States", "StateIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Masters.States", "StateIdByFk")
                         .WithMany()
                         .HasForeignKey("StateId");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("CityIdByFk");
 
@@ -716,31 +899,37 @@ namespace svc.system.center.migration.Migrations
                     b.Navigation("TenantIdFK");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Cities", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Cities", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Masters.Countries", "CountryIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Masters.Countries", "CountryIdByFk")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "CreateByFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
                         .WithMany()
                         .HasForeignKey("CreateBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "ModifiedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
                         .WithMany()
                         .HasForeignKey("ModifiedBy");
 
-                    b.HasOne("svc.birdcage.entity.Masters.States", "StateIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Masters.States", "StateIdByFk")
                         .WithMany()
                         .HasForeignKey("StateId");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("CountryIdByFk");
 
@@ -755,23 +944,29 @@ namespace svc.system.center.migration.Migrations
                     b.Navigation("TenantIdFK");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Countries", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Countries", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "CreateByFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
                         .WithMany()
                         .HasForeignKey("CreateBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "ModifiedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
                         .WithMany()
                         .HasForeignKey("ModifiedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("CreateByFK");
 
@@ -782,23 +977,29 @@ namespace svc.system.center.migration.Migrations
                     b.Navigation("TenantIdFK");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.Languages", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.Languages", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "CreateByFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
                         .WithMany()
                         .HasForeignKey("CreateBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "ModifiedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
                         .WithMany()
                         .HasForeignKey("ModifiedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("CreateByFK");
 
@@ -809,27 +1010,33 @@ namespace svc.system.center.migration.Migrations
                     b.Navigation("TenantIdFK");
                 });
 
-            modelBuilder.Entity("svc.birdcage.entity.Masters.States", b =>
+            modelBuilder.Entity("svc.birdcage.parrot.Masters.States", b =>
                 {
-                    b.HasOne("svc.birdcage.entity.Masters.Countries", "CountryIdByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Branches", "BranchIdFK")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("svc.birdcage.parrot.Masters.Countries", "CountryIdByFk")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "CreateByFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "CreateByFK")
                         .WithMany()
                         .HasForeignKey("CreateBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "DeletedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "DeletedByFk")
                         .WithMany()
                         .HasForeignKey("DeletedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Users", "ModifiedByFk")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Users", "ModifiedByFk")
                         .WithMany()
                         .HasForeignKey("ModifiedBy");
 
-                    b.HasOne("svc.birdcage.entity.Authorization.Tenant", "TenantIdFK")
+                    b.HasOne("svc.birdcage.parrot.Authorization.Tenant", "TenantIdFK")
                         .WithMany()
                         .HasForeignKey("TenantId");
+
+                    b.Navigation("BranchIdFK");
 
                     b.Navigation("CountryIdByFk");
 

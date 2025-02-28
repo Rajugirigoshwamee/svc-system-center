@@ -6,11 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace svc.system.center.migration.Migrations
 {
     /// <inheritdoc />
-    public partial class IntialMigration : Migration
+    public partial class intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Branches",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MobileNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Branches", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Tenant",
                 columns: table => new
@@ -37,6 +51,7 @@ namespace svc.system.center.migration.Migrations
                     Password = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -48,6 +63,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_Tenant_TenantId",
                         column: x => x.TenantId,
@@ -81,6 +101,7 @@ namespace svc.system.center.migration.Migrations
                     FlagUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -92,6 +113,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Countries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Countries_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Countries_Tenant_TenantId",
                         column: x => x.TenantId,
@@ -124,6 +150,7 @@ namespace svc.system.center.migration.Migrations
                     Flag = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -135,6 +162,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Languages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Languages_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Languages_Tenant_TenantId",
                         column: x => x.TenantId,
@@ -158,6 +190,53 @@ namespace svc.system.center.migration.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Permission",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permission", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Permission_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Permission_Tenant_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenant",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Permission_Users_CreateBy",
+                        column: x => x.CreateBy,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Permission_Users_DeletedBy",
+                        column: x => x.DeletedBy,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Permission_Users_ModifiedBy",
+                        column: x => x.ModifiedBy,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -166,6 +245,7 @@ namespace svc.system.center.migration.Migrations
                     DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -177,6 +257,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Roles_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Roles_Tenant_TenantId",
                         column: x => x.TenantId,
@@ -208,6 +293,7 @@ namespace svc.system.center.migration.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -219,6 +305,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_States", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_States_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_States_Countries_CountryId",
                         column: x => x.CountryId,
@@ -254,6 +345,7 @@ namespace svc.system.center.migration.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -261,6 +353,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsersRoles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UsersRoles_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_UsersRoles_Roles_RoleId",
                         column: x => x.RoleId,
@@ -295,6 +392,7 @@ namespace svc.system.center.migration.Migrations
                     StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -306,6 +404,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cities_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Cities_Countries_CountryId",
                         column: x => x.CountryId,
@@ -349,6 +452,7 @@ namespace svc.system.center.migration.Migrations
                     StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -360,6 +464,11 @@ namespace svc.system.center.migration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Areas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Areas_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Areas_Cities_CityId",
                         column: x => x.CityId,
@@ -396,6 +505,11 @@ namespace svc.system.center.migration.Migrations
                         principalTable: "Users",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Areas_BranchId",
+                table: "Areas",
+                column: "BranchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Areas_CityId",
@@ -453,6 +567,11 @@ namespace svc.system.center.migration.Migrations
                 column: "TenantId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cities_BranchId",
+                table: "Cities",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",
                 table: "Cities",
                 column: "CountryId");
@@ -503,6 +622,11 @@ namespace svc.system.center.migration.Migrations
                 column: "TenantId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Countries_BranchId",
+                table: "Countries",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Countries_CreateBy",
                 table: "Countries",
                 column: "CreateBy");
@@ -549,6 +673,11 @@ namespace svc.system.center.migration.Migrations
                 column: "TenantId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Languages_BranchId",
+                table: "Languages",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Languages_CreateBy",
                 table: "Languages",
                 column: "CreateBy");
@@ -587,6 +716,56 @@ namespace svc.system.center.migration.Migrations
                 name: "IX_Languages_TenantId",
                 table: "Languages",
                 column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_BranchId",
+                table: "Permission",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_CreateBy",
+                table: "Permission",
+                column: "CreateBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_CreateDate",
+                table: "Permission",
+                column: "CreateDate");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_DeletedBy",
+                table: "Permission",
+                column: "DeletedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_DeletedDate",
+                table: "Permission",
+                column: "DeletedDate");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_IsDeleted",
+                table: "Permission",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_ModifiedBy",
+                table: "Permission",
+                column: "ModifiedBy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_ModifiedDate",
+                table: "Permission",
+                column: "ModifiedDate");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_TenantId",
+                table: "Permission",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roles_BranchId",
+                table: "Roles",
+                column: "BranchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roles_CreateBy",
@@ -632,6 +811,11 @@ namespace svc.system.center.migration.Migrations
                 name: "IX_Roles_TenantId",
                 table: "Roles",
                 column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_States_BranchId",
+                table: "States",
+                column: "BranchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_CountryId",
@@ -685,6 +869,11 @@ namespace svc.system.center.migration.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_BranchId",
+                table: "Users",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_CreateBy",
                 table: "Users",
                 column: "CreateBy");
@@ -731,6 +920,11 @@ namespace svc.system.center.migration.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_UsersRoles_BranchId",
+                table: "UsersRoles",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UsersRoles_DeletedBy",
                 table: "UsersRoles",
                 column: "DeletedBy");
@@ -771,6 +965,9 @@ namespace svc.system.center.migration.Migrations
                 name: "Languages");
 
             migrationBuilder.DropTable(
+                name: "Permission");
+
+            migrationBuilder.DropTable(
                 name: "UsersRoles");
 
             migrationBuilder.DropTable(
@@ -787,6 +984,9 @@ namespace svc.system.center.migration.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Branches");
 
             migrationBuilder.DropTable(
                 name: "Tenant");
