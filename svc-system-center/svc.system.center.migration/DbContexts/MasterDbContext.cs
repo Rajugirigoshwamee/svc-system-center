@@ -4,12 +4,8 @@ using svc.birdcage.parrot.Masters;
 
 namespace svc.system.center.migration.DbContexts;
 
-public class MasterDbContext : DbContext
+public class MasterDbContext(DbContextOptions<MasterDbContext> options) : DbContext(options)
 {
-    public MasterDbContext(DbContextOptions<MasterDbContext> options) : base(options)
-    {
-    }
-
     public virtual DbSet<Tenant> Tenant { get; set; }
     public virtual DbSet<Languages> Languages { get; set; }
     public virtual DbSet<Countries> Countries { get; set; }

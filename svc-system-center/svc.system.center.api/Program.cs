@@ -68,12 +68,12 @@ builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
 
 #if DEBUG
 
-builder
-.WithOrigins("http://localhost:4200", "http://localhost", "http://localhost:19952", "http://localhost:8082")
-.AllowAnyMethod()
-.AllowAnyHeader()
-.AllowCredentials()
- .WithExposedHeaders("X-Count");
+    builder
+    .WithOrigins("http://localhost:4200", "http://localhost", "http://localhost:19952", "http://localhost:8082")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()
+     .WithExposedHeaders("X-Count");
 
 #elif STAGGING
 

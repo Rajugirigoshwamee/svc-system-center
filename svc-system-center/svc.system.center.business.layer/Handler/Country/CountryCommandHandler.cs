@@ -5,14 +5,14 @@ using svc.system.center.domain.Interfaces.Repositories;
 
 namespace svc.system.center.business.layer.Handler.Country;
 
-public class CountryCommandHandler : 
+public class CountryCommandHandler :
     ICommandHandler<AddCountryCommand, bool>,
     ICommandHandler<DeleteCountryCommand, bool>,
     ICommandHandler<UpdateCountryCommand, bool>
 {
     public ICountryRepository _countryRepository { get; set; }
     public ICountryAssembler _countryAssembler { get; set; }
-    
+
     public CountryCommandHandler(
         ICountryRepository countryRepository,
         ICountryAssembler countryAssembler
@@ -39,7 +39,7 @@ public class CountryCommandHandler :
         await _countryRepository.DeleteAsync(deleteEntry);
         return true;
     }
-    
+
     public async Task<bool> Handle(UpdateCountryCommand command)
     {
         var country = _countryAssembler.WriteEntity(command);

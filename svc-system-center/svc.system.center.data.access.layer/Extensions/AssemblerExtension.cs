@@ -1,5 +1,4 @@
 ﻿using svc.system.center.data.access.layer.Assembler.Public;
-using svc.system.center.data.access.layer.Repository;
 using svc.system.center.domain.Interfaces.Assemblers.Public;
 
 namespace Microsoft.Extensions.DependencyInjection;

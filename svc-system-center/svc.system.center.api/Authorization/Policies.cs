@@ -14,6 +14,6 @@ namespace svc.system.center.api.Authorization
         private string version { get; set; }
         private string controllerName { get; set; }
         private Permission[] permissions { get; set; }
-        public List<Policies> policies { get; set; }= new List<Policies>();
+        public List<Policies> policies { get; set; } = new List<Policies>();
     }
 }

@@ -31,7 +31,7 @@ public class ExceptionFilters : ExceptionFilterAttribute
                 Success = false,
                 Message = exception.Message
             });
-        } 
+        }
         else if (context.Exception is DbUpdateException)
         {
             var exception = context.Exception as DbUpdateException;

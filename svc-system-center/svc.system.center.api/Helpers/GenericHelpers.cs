@@ -1,6 +1,6 @@
 ﻿namespace svc.system.center.api.Helpers
 {
-    public class GenericHelpers
+    public static class GenericHelpers
     {
         #region 1. Object Declarations and Constructor
 
