@@ -44,6 +44,7 @@ builder.Services.AddSwaggerGen(swagger =>
 #region Initialization of Config
 
 builder.AddConfigurations();
+builder.AddValidator();
 
 #endregion
 

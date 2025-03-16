@@ -6,6 +6,7 @@ using svc.birdcage.hawk.Response.Base;
 using svc.system.center.api.Controllers.Comman;
 using svc.system.center.api.Filters;
 using svc.system.center.domain.Commands.Country;
+using svc.system.center.domain.Interfaces.Assemblers.Public;
 using svc.system.center.domain.Interfaces.Repositories;
 using svc.system.center.domain.Models.Dtos.V1.Public.Country;
 using Swashbuckle.AspNetCore.Annotations;
@@ -20,12 +21,14 @@ public class CountryController(
     ICommandHandler<AddCountryCommand, bool> commandHandler,
     ICommandHandler<DeleteCountryCommand, bool> deleteCommandHandler,
     ICommandHandler<UpdateCountryCommand, bool> updateCommandHandler,
-    ICountryRepository countryRepository) : BaseController
+    ICountryRepository countryRepository,
+    ICountryAssembler countryAssembler) : BaseController
 {
     private readonly ICountryRepository _countryRepository = countryRepository;
     private readonly ICommandHandler<AddCountryCommand, bool> _commandHandler = commandHandler;
     private readonly ICommandHandler<DeleteCountryCommand, bool> _deleteCommandHandler = deleteCommandHandler;
     private readonly ICommandHandler<UpdateCountryCommand, bool> _updateCommandHandler = updateCommandHandler;
+    private readonly ICountryAssembler _countryAssembler = countryAssembler;
 
     [HttpGet]
     [SwaggerResponse(statusCode: StatusCodes.Status200OK, type: typeof(IEnumerable<GetCountryDto>))]
@@ -33,6 +36,17 @@ public class CountryController(
     {
         var list = await _countryRepository.GetCountryListWithPagination(request);
         return SuccessResponse(list);
+    }
+
+    [HttpGet("{id}")]
+    [SwaggerResponse(statusCode: StatusCodes.Status200OK, type: typeof(GetCountryDto))]
+    public async Task<IActionResult> Get([FromRoute] Guid id)
+    {
+        var country = await _countryRepository.GetByIdAsync(id);
+
+        if (country == null) return NotFound();
+            
+        return SuccessResponse(_countryAssembler.WriteDTO(country));
     }
 
     [HttpPost]

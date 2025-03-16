@@ -26,8 +26,9 @@ BEGIN
 		C.Id as id,
 		C.Name AS name,
 		C.Code AS code,
-		C.MobileCode AS MobileCode,
-		C.FlagUrl AS FlagUrl,
+		C.MobileCode AS mobileCode,
+		C.FlagUrl AS flagUrl,
+		C.Description AS description,
 		COUNT(C.Id) OVER() AS Total
 	FROM [dbo].[Countries] C WITH(NOLOCK)
 	WHERE 
