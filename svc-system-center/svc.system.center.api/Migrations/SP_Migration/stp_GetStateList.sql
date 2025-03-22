@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE [dbo].[stp_GetCountryList]
+﻿CREATE OR ALTER PROCEDURE [dbo].[stp_GetStateList]
 (
 	@Id				UNIQUEIDENTIFIER = NULL,
 	@Search			NVARCHAR = NULL,
@@ -12,7 +12,7 @@ BEGIN
 
 	IF(@PageSize IS NULL)
 	BEGIN 
-		SELECT @PageSize=COUNT(C.Id) FROM [dbo].[Countries] C WITH(NOLOCK);
+		SELECT @PageSize=COUNT(C.Id) FROM [dbo].[States] C WITH(NOLOCK);
 	END
 
 	IF(@PageSize IS NULL)
@@ -23,16 +23,16 @@ BEGIN
 	DECLARE @Offset INT = (@PageNo * @PageSize);
 
     SELECT 
-		C.Id as id,
-		C.Name AS name,
-		C.Code AS code,
-		C.MobileCode AS mobileCode,
-		C.FlagUrl AS flagUrl,
+		S.Id as id,
+		S.Name AS name,
+		C.Name AS countryName,
+		S.Code AS code,
 		COUNT(C.Id) OVER() AS Total
-	FROM [dbo].[Countries] C WITH(NOLOCK)
+	FROM [dbo].[States] S WITH(NOLOCK)
+	INNER JOIN [dbo].[Countries] C WITH(NOLOCK) ON S.CountryId = C.Id
 	WHERE 
-		C.IsDeleted=0
-		AND (@Id IS NULL OR C.Id = @Id)
+		S.IsDeleted=0
+		AND (@Id IS NULL OR S.Id = @Id)
 	ORDER BY 
 		C.Name
 	OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY

@@ -10,5 +10,4 @@ public class GetCountryDto : BaseListResponseDto
     public required string Code { get; set; }
     public required string MobileCode { get; set; }
     public required string FlagUrl { get; set; }
-    public required string Description { get; set; }
 }

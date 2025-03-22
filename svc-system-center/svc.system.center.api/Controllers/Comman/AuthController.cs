@@ -14,17 +14,17 @@ namespace svc.system.center.api.Controllers.Comman;
 [ApiVersion("1.0")]
 public class AuthController : BaseController
 {
-    [HttpPost]
-    public async Task<IActionResult> Login([FromBody] LoginRequest request, [FromServices] IOptions<AuthConfig> AuthConfigOptions)
-    {
-        if (request == null) return ErrorResponse("error_empty_request");
+    //[HttpPost]
+    //public async Task<IActionResult> Login([FromBody] LoginRequest request, [FromServices] IOptions<AuthConfig> AuthConfigOptions)
+    //{
+    //    //if (request == null) return ErrorResponse("error_empty_request");
 
-        var UniqueId = Guid.NewGuid().ToString(); ;
-        var user = await DapperRepository.FindAsync<ProfileResponse>(SpConsts.Account.Login, new { request.UserName, Password = Crypto.Encrypt(request.Password), UniqueId });
-        if (user == null) throw new ApiException("error_invalid_login");
-        await ValidateUserAsync(user, user.UserRole);
-        var user_token = new TokenHelpers(DapperRepository, Crypto).GetAccessToken(AuthConfigOptions.Value, user, UniqueId);
-        Cache.SetDataInCache(user.Id.ToString(), user);
-        return OkResponse(new { user_token, user });
-    }
+    //    //var UniqueId = Guid.NewGuid().ToString(); ;
+    //    //var user = await DapperRepository.FindAsync<ProfileResponse>(SpConsts.Account.Login, new { request.UserName, Password = Crypto.Encrypt(request.Password), UniqueId });
+    //    //if (user == null) throw new ApiException("error_invalid_login");
+    //    //await ValidateUserAsync(user, user.UserRole);
+    //    //var user_token = new TokenHelpers(DapperRepository, Crypto).GetAccessToken(AuthConfigOptions.Value, user, UniqueId);
+    //    //Cache.SetDataInCache(user.Id.ToString(), user);
+    //    //return OkResponse(new { user_token, user });
+    //}
 }

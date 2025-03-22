@@ -39,7 +39,7 @@ public class ExceptionFilters : ExceptionFilterAttribute
             context.Result = new JsonResult(new BaseErrorResponse
             {
                 Success = false,
-                Message = exception.Message
+                Message = exception.InnerException.Message
             });
         }
         else

@@ -1,8 +1,10 @@
 #region Set Environment
 
 using Asp.Versioning;
+using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using svc.system.center.api.Helpers;
+using System.Reflection;
 
 var EnveriomentName = string.Empty;
 
@@ -102,7 +104,8 @@ builder.Services.AddApiVersioning(x =>
     x.SubstituteApiVersionInUrl = true;
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(c=>c.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddEndpointsApiExplorer();
 
 

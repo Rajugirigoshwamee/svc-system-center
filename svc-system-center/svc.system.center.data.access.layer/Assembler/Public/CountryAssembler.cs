@@ -14,7 +14,6 @@ public class CountryAssembler : ICountryAssembler
         {
             Id = entity.Id,
             Name = entity.Name,
-            Description = entity.Description,
             Code = entity.Code,
             FlagUrl = entity.FlagUrl,
             MobileCode = entity.MobileCode
@@ -26,7 +25,6 @@ public class CountryAssembler : ICountryAssembler
         return new Countries()
         {
             Name = command.Name,
-            Description = command.Description,
             Code = command.Code,
             FlagUrl = command.FlagUrl,
             MobileCode = command.MobileCode
@@ -39,7 +37,6 @@ public class CountryAssembler : ICountryAssembler
         {
             Id = command.Id,
             Name = command.Name,
-            Description = command.Description,
             Code = command.Code,
             FlagUrl = command.FlagUrl,
             MobileCode = command.MobileCode
