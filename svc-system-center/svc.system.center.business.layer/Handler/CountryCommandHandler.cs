@@ -3,7 +3,7 @@ using svc.system.center.domain.Commands.Country;
 using svc.system.center.domain.Interfaces.Assemblers.Public;
 using svc.system.center.domain.Interfaces.Repositories;
 
-namespace svc.system.center.business.layer.Handler.Country;
+namespace svc.system.center.business.layer.Handler;
 
 public class CountryCommandHandler :
     ICommandHandler<AddCountryCommand, bool>,

@@ -9,6 +9,7 @@ public static class AssemblerExtension
     {
 
         services.AddScoped<ICountryAssembler, CountryAssembler>();
+        services.AddScoped<IStateAssembler, StateAssembler>();
 
         return services;
     }

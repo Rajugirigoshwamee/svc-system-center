@@ -8,5 +8,5 @@ namespace svc.system.center.domain.Interfaces.Repositories;
 
 public interface IStateRepository : IRepository<States>
 {
-    Task<IEnumerable<GetStateDto>> GetListWithPagination(BaseListRequestDto request);
+    Task<IEnumerable<GetStateDto>> GetList(BaseListRequestDto request);
 }

@@ -18,7 +18,7 @@ public class StateRepository : Repository<States>, IStateRepository
         _dapperService = dapperService;
     }
 
-    public async Task<IEnumerable<GetStateDto>> GetListWithPagination(BaseListRequestDto request)
+    public async Task<IEnumerable<GetStateDto>> GetList(BaseListRequestDto request)
     {
         var list = await _dapperService.GetTableAsync<GetStateDto>(StateSpConst.GetStateList, request);
         return list;

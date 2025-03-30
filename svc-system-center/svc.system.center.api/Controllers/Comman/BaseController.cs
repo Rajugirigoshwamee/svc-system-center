@@ -36,13 +36,13 @@ namespace svc.system.center.api.Controllers.Comman
 
         #region Failed Response
 
-        protected IActionResult ErrorResponse() => throw new ApiException("Error Something went Wrong.", 400);
+        protected static IActionResult ErrorResponse() => throw new ApiException("Error Something went Wrong.", 400);
 
-        protected IActionResult ErrorResponse(string message) => throw new ApiException(message, 400);
+        protected static IActionResult ErrorResponse(string message) => throw new ApiException(message, 400);
 
-        protected IActionResult ErrorResponse(string message, int statusCode) => throw new ApiException(message, statusCode);
+        protected static IActionResult ErrorResponse(string message, int statusCode) => throw new ApiException(message, statusCode);
 
-        protected IActionResult ErrorResponse(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary ModelState)
+        protected static IActionResult ErrorResponse(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary ModelState)
         {
             string message = string.Join("; ", ModelState.SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage));
             throw new ApiException(message, 400);
