@@ -23,7 +23,7 @@ public class StateCommandHandler :
 
     public async Task<bool> Handle(DeleteStateCommand command)
     {
-        var deleteEntry = await _stateRepository.GetByIdAsync(command.Id);
+        var deleteEntry = await _stateRepository.FindByIdAsync(command.Id);
 
         if (deleteEntry == null)
             return false;

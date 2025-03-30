@@ -13,7 +13,7 @@ public static class ContextExtensions
     {
         string connectionString = builder.Configuration.GetSection("ConnectionStrings:DefaultConnection").Value!;
         builder.Services.AddDbContext<MasterDbContext>(context => context.UseSqlServer(connectionString));
-        builder.Services.AddScoped<IDapperService>(x => new DapperServices(connectionString!));
+        builder.Services.AddTransient<IDapperService>(x => new DapperServices(connectionString!));
         builder.Services.AddScoped<SeedHelper>();
         builder.Services.AddScoped<ExceptionFilters>();
 

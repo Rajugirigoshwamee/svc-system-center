@@ -31,7 +31,7 @@ public class CountryCommandHandler :
 
     public async Task<bool> Handle(DeleteCountryCommand command)
     {
-        var deleteEntry = await _countryRepository.GetByIdAsync(command.Id);
+        var deleteEntry = await _countryRepository.FindByIdAsync(command.Id);
 
         if (deleteEntry == null)
             return false;

@@ -42,7 +42,7 @@ public class CountryController(
     [SwaggerResponse(statusCode: StatusCodes.Status200OK, type: typeof(GetCountryDto))]
     public async Task<IActionResult> Get([FromRoute] Guid id)
     {
-        var country = await _countryRepository.GetByIdAsync(id);
+        var country = await _countryRepository.FindByIdAsync(id);
 
         if (country == null) return NotFound();
             
