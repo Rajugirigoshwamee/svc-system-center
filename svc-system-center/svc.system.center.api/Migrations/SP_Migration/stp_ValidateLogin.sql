@@ -11,8 +11,7 @@ BEGIN
 		U.Id as id,
 		U.Name AS name,
 		U.Email AS email,
-		U.Surname AS surname,
-		C.MobileNo AS mobileNo
+		U.Surname AS surname
 	FROM [dbo].[Users] U WITH(NOLOCK)
 	WHERE 
 		U.IsDeleted=0

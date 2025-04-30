@@ -22,6 +22,7 @@ public class UserRepository : Repository<Users>, IUserRepository
 
     public async Task<LoginUserDto> LoginUser(string username, string password)
     {
+        var eny = _encryption.EncryptData(password, username, username);
         var user = await _dapperService.FindAsync<LoginUserDto>(UserSpConst.ValidateLogin, new
         {
             Username = username,

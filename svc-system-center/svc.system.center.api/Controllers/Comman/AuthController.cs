@@ -26,6 +26,6 @@ public class AuthController(IUserRepository userRepository) : BaseController
         var user = await _userRepository.LoginUser(request.Email, request.Password);
         if (user == null) throw new ApiException("error_invalid_login");
         var user_token = TokenHelpers.GetAccessToken(AuthConfigOptions.Value, JsonConvert.SerializeObject(user));
-        return SuccessResponse(new { userDetails= user, token=user_token });
+        return SuccessResponse(new { userDetails = user, token = user_token });
     }
 }
