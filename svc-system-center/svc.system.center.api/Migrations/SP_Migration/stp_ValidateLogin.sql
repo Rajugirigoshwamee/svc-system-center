@@ -1,7 +1,7 @@
 ﻿CREATE OR ALTER PROCEDURE [dbo].[stp_ValidateLogin]
 (
-	@UserName			NVARCHAR = NULL,
-	@Password			NVARCHAR = NULL
+	@UserName			NVARCHAR(MAX) = NULL,
+	@Password			NVARCHAR(MAX) = NULL
 )
 AS
 BEGIN
@@ -11,7 +11,8 @@ BEGIN
 		U.Id as id,
 		U.Name AS name,
 		U.Email AS email,
-		U.Surname AS surname
+		U.Surname AS surname,
+		U.MobileNo
 	FROM [dbo].[Users] U WITH(NOLOCK)
 	WHERE 
 		U.IsDeleted=0

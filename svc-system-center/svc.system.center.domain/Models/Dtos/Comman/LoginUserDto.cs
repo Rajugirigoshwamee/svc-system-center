@@ -2,14 +2,14 @@
 
 public class LoginUserDto
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public int Name { get; set; }
+    public required string Name { get; set; }
 
-    public int Email { get; set; }
+    public required string Email { get; set; }
 
-    public int Surname { get; set; }
+    public required string Surname { get; set; }
 
-    public int MobileNo { get; set; }
+    public required string MobileNo { get; set; }
 
 }
