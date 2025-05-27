@@ -19,3 +19,5 @@
 /svc-system-center/svc.system.center.domain/obj
 /svc-system-center/svc.system.center.migration/bin/Debug/net8.0
 /svc-system-center/svc.system.center.migration/obj
+/svc-system-center/svc.system.center.data.access.layer.test/bin/Debug/net9.0
+/svc-system-center/svc.system.center.data.access.layer.test/obj

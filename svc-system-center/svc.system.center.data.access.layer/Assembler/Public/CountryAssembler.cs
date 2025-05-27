@@ -22,6 +22,8 @@ public class CountryAssembler : ICountryAssembler
 
     public Countries WriteEntity(AddCountryCommand command)
     {
+        if(command == null) return null;
+
         return new Countries()
         {
             Name = command.Name,
