@@ -1,4 +1,6 @@
-﻿using svc.system.center.data.access.layer.Assembler.Public;
+﻿using FluentAssertions;
+using svc.birdcage.parrot.Masters;
+using svc.system.center.data.access.layer.Assembler.Public;
 using svc.system.center.domain.Commands.Country;
 using svc.system.center.domain.Interfaces.Assemblers.Public;
 
@@ -8,32 +10,73 @@ namespace svc.system.center.data.access.layer.test.Assembler
     {
         private readonly ICountryAssembler _assembler= new CountryAssembler();
 
-
-        [Fact]
-        public void AddCountry_Command_Should_Map_Country_Entity_Success()
+         [Fact]
+        public void WriteDTO_Should_Map_Countries_To_GetCountryDto()
         {
             // Arrange
-            var user = new AddCountryCommand("INDIA","IND","+91","test");
+            var country = new Countries
+            {
+                Name = "USA",
+                Code = "US",
+                FlagUrl = "http://example.com/flags/us.png",
+                MobileCode = "+1"
+            };
 
             // Act
-            var entity = _assembler.WriteEntity(user);
+            var result = _assembler.WriteDTO(country);
 
             // Assert
-            Assert.NotNull(entity);
-            Assert.Equal("INDIA", entity.Name);
-            Assert.Equal("IND", entity.Code);
-            Assert.Equal("+91", entity.MobileCode);
-            Assert.Equal("test", entity.FlagUrl);
+            result.Should().NotBeNull();
+            result.Name.Should().Be("USA");
+            result.Code.Should().Be("US");
+            result.FlagUrl.Should().Be("http://example.com/flags/us.png");
+            result.MobileCode.Should().Be("+1");
         }
 
         [Fact]
-        public void AddCountry_Command_Should_Map_Country_Entity_If_AddCountryCommand_Is_Null()
+        public void WriteEntity_With_AddCountryCommand_Should_Map_To_Countries()
         {
+            // Arrange
+            var command = new AddCountryCommand("Canada", "CA", "+1", "http://example.com/flags/ca.png");             
+
             // Act
-            var entity = _assembler.WriteEntity((AddCountryCommand)null);
+            var result = _assembler.WriteEntity(command);
 
             // Assert
-            Assert.Null(entity);
+            result.Should().NotBeNull();
+            result.Name.Should().Be("Canada");
+            result.Code.Should().Be("CA");
+            result.FlagUrl.Should().Be("http://example.com/flags/ca.png");
+            result.MobileCode.Should().Be("+1");
+        }
+
+        [Fact]
+        public void WriteEntity_With_Null_AddCountryCommand_Should_Return_Null()
+        {
+            // Act
+            var result = _assembler.WriteEntity((AddCountryCommand)null);
+
+            // Assert
+            result.Should().BeNull();
+        }
+
+        [Fact]
+        public void WriteEntity_With_UpdateCountryCommand_Should_Map_To_Countries()
+        {
+            // Arrange
+            Guid id = Guid.NewGuid();
+            var command = new UpdateCountryCommand(id,"Germany","DE", "+49","http://example.com/flags/de.png");
+
+            // Act
+            var result = _assembler.WriteEntity(command);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Id.Should().Be(id);
+            result.Name.Should().Be("Germany");
+            result.Code.Should().Be("DE");
+            result.FlagUrl.Should().Be("http://example.com/flags/de.png");
+            result.MobileCode.Should().Be("+49");
         }
     }
 }
