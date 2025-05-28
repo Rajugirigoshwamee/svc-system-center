@@ -8,6 +8,8 @@ public class StateAssembler : IStateAssembler
 {
     public States WriteEntity(AddStateCommand command)
     {
+        if (command == null) return null;
+
         return new States()
         {
             Name = command.Name,
@@ -18,6 +20,8 @@ public class StateAssembler : IStateAssembler
 
     public States WriteEntity(UpdateStateCommand command)
     {
+        if (command == null) return null;
+
         return new States()
         {
             Id = command.Id,
