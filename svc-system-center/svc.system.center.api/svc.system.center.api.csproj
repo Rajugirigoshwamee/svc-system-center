@@ -36,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\SP_Migration\" />
     <Folder Include="Migrations\SP_Migration_Completed\" />
   </ItemGroup>
 
