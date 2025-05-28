@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE [dbo].[stp_GetCountryForDropdown]
+CREATE OR ALTER PROCEDURE [dbo].[stp_GetCountryForDropdown]
 AS
 BEGIN
 	SET NOCOUNT ON;
