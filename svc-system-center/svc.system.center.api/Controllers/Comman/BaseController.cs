@@ -13,7 +13,7 @@ namespace svc.system.center.api.Controllers.Comman
 
         protected IActionResult SuccessResponse() => SuccessResponse("Your request submit successfully.");
 
-        protected IActionResult SuccessResponse(string message) => Ok(new BaseErrorResponse { Success = true, Message = "Your request submit successfully." });
+        protected IActionResult SuccessResponse(string message) => Ok(new BaseErrorResponse { Success = true, Message = message });
 
         protected IActionResult SuccessResponse(dynamic data) => Ok(data);
 
