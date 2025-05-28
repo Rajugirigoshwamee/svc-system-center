@@ -12,5 +12,4 @@ BEGIN
 		C.IsDeleted=0
 	ORDER BY 
 		C.Name
-
 END
