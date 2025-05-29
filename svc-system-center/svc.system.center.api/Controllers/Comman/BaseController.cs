@@ -32,6 +32,8 @@ namespace svc.system.center.api.Controllers.Comman
             return Ok(details);
         }
 
+        protected IActionResult SuccessResponseWithoutPagination(IEnumerable<dynamic> details) => Ok(details);
+
         #endregion Ok Response
 
         #region Failed Response

@@ -14,6 +14,12 @@ public class StateCommandHandler :
     public IStateRepository _stateRepository { get; set; }
     public IStateAssembler _stateAssembler { get; set; }
 
+    public StateCommandHandler(IStateRepository stateRepository, IStateAssembler stateAssembler)
+    {
+        _stateAssembler = stateAssembler;   
+        _stateRepository = stateRepository;
+    }
+
     public async Task<bool> Handle(AddStateCommand command)
     {
         var entity = _stateAssembler.WriteEntity(command);

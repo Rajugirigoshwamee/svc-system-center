@@ -23,7 +23,7 @@ namespace svc.system.center.api.Controllers.V1.Public
         public async Task<IActionResult> Get()
         {
             var list = await _countryRepository.GetListForDropdown();
-            return Ok(list);
+            return SuccessResponseWithoutPagination(list);
         }
     }
 }
