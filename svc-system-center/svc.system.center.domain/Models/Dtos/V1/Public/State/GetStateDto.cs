@@ -8,4 +8,5 @@ public class GetStateDto : BaseListResponseDto
     public required string Name { get; set; }
     public required string Code { get; set; }
     public required string CountryName { get; set; }
+    public required Guid CountryId { get; set; }
 }

@@ -26,6 +26,7 @@ BEGIN
 		S.Id as id,
 		S.Name AS name,
 		C.Name AS countryName,
+		C.Id AS countryId,
 		S.Code AS code,
 		COUNT(C.Id) OVER() AS Total
 	FROM [dbo].[States] S WITH(NOLOCK)
