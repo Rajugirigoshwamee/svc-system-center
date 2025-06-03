@@ -20,7 +20,6 @@ namespace svc.system.center.api.Controllers.V1.Public
         ICommandHandler<AddStateCommand, bool> commandHandler,
         ICommandHandler<DeleteStateCommand, bool> deleteCommandHandler,
         ICommandHandler<UpdateStateCommand, bool> updateCommandHandler,
-        IStateAssembler StateAssembler,
         IStateRepository stateRepository) : BaseController
     {
 
@@ -28,7 +27,6 @@ namespace svc.system.center.api.Controllers.V1.Public
         private readonly ICommandHandler<AddStateCommand, bool> _commandHandler = commandHandler;
         private readonly ICommandHandler<DeleteStateCommand, bool> _deleteCommandHandler = deleteCommandHandler;
         private readonly ICommandHandler<UpdateStateCommand, bool> _updateCommandHandler = updateCommandHandler;
-        private readonly IStateAssembler _StateAssembler = StateAssembler;
 
         [HttpGet]
         [SwaggerResponse(statusCode: StatusCodes.Status200OK, type: typeof(IEnumerable<GetStateDto>))]

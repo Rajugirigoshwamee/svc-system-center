@@ -10,6 +10,7 @@ public static class AssemblerExtension
 
         services.AddScoped<ICountryAssembler, CountryAssembler>();
         services.AddScoped<IStateAssembler, StateAssembler>();
+        services.AddScoped<ICityAssembler, CityAssembler>();
 
         return services;
     }

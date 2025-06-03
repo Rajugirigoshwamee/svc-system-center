@@ -1,5 +1,6 @@
 ﻿using svc.birdcage.hawk.Commands;
 using svc.system.center.business.layer.Handler;
+using svc.system.center.domain.Commands.City;
 using svc.system.center.domain.Commands.Country;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,13 @@ public static class CommandHandlerExtension
         services.Decorate<ICommandHandler<AddStateCommand, bool>, TransactionCommandHandler<AddStateCommand, bool>>();
         services.Decorate<ICommandHandler<DeleteStateCommand, bool>, TransactionCommandHandler<DeleteStateCommand, bool>>();
         services.Decorate<ICommandHandler<UpdateStateCommand, bool>, TransactionCommandHandler<UpdateStateCommand, bool>>();
+
+        services.AddScoped<ICommandHandler<AddCityCommand, bool>, CityCommandHandler>();
+        services.AddScoped<ICommandHandler<DeleteCityCommand, bool>, CityCommandHandler>();
+        services.AddScoped<ICommandHandler<UpdateCityCommand, bool>, CityCommandHandler>();
+        services.Decorate<ICommandHandler<AddCityCommand, bool>, TransactionCommandHandler<AddCityCommand, bool>>();
+        services.Decorate<ICommandHandler<DeleteCityCommand, bool>, TransactionCommandHandler<DeleteCityCommand, bool>>();
+        services.Decorate<ICommandHandler<UpdateCityCommand, bool>, TransactionCommandHandler<UpdateCityCommand, bool>>();
 
         return services;
     }
