@@ -35,4 +35,8 @@
     <ProjectReference Include="..\svc.system.center.migration\svc.system.center.migration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\SP_Migration_Completed\" />
+  </ItemGroup>
+
 </Project>

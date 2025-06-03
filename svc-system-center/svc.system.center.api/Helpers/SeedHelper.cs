@@ -21,7 +21,7 @@ namespace svc.system.center.api.Helpers
         public async Task Seed()
         {
             var directoryPath = "./Migrations/SP_Migration";
-            var newDirectoryPath = "./Migrations/SP_Migration_Completed";
+            //var newDirectoryPath = "./Migrations/SP_Migration_Completed";
             string[] sqlFilesPaths = Directory.GetFiles(directoryPath, "*.sql", SearchOption.TopDirectoryOnly);
             foreach (string sqlFilePath in sqlFilesPaths)
             {
@@ -29,12 +29,12 @@ namespace svc.system.center.api.Helpers
 
                 await DapperService.AddOrUpdateAsync<dynamic>(sql, new { }, type: System.Data.CommandType.Text);
 
-                var fileName=sqlFilePath.Split("\\")[1];
+                //var fileName=sqlFilePath.Split("\\")[1];
 
-                if (!Directory.Exists(newDirectoryPath))
-                    Directory.CreateDirectory(newDirectoryPath);
+                //if (!Directory.Exists(newDirectoryPath))
+                //    Directory.CreateDirectory(newDirectoryPath);
 
-                File.Move($"{directoryPath}/{fileName}", $"{newDirectoryPath}/{fileName}" );
+                //File.Move($"{directoryPath}/{fileName}", $"{newDirectoryPath}/{fileName}" );
                 
             }
         }
