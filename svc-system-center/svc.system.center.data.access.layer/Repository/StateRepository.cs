@@ -9,18 +9,7 @@ using svc.system.center.migration.DbContexts;
 
 namespace svc.system.center.data.access.layer.Repository;
 
-public class StateRepository : Repository<States>, IStateRepository
+public class StateRepository(IDapperService dapperService, MasterDbContext dbContext) : Repository<States>(dbContext), IStateRepository
 {
-    private readonly IDapperService _dapperService;
-
-    public StateRepository(IDapperService dapperService, MasterDbContext dbContext) : base(dbContext)
-    {
-        _dapperService = dapperService;
-    }
-
-    public async Task<IEnumerable<GetStateDto>> GetList(BaseListRequestDto request)
-    {
-        var list = await _dapperService.GetTableAsync<GetStateDto>(StateSpConst.GetStateList, request);
-        return list;
-    }
+    public async Task<IEnumerable<GetStateDto>> GetList(BaseListRequestDto request) => await dapperService.GetTableAsync<GetStateDto>(StateSpConst.GetStateList, request);
 }

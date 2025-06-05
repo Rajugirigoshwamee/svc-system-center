@@ -14,7 +14,8 @@ namespace svc.system.center.api.Controllers.V1.Public
     [Route("api/v{apiVersion:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
     public class MasterController(
-    ICountryRepository countryRepository) : BaseController
+    ICountryRepository countryRepository,
+    IStateRepository stateRepository) : BaseController
     {
 
         private readonly ICountryRepository _countryRepository = countryRepository;
@@ -32,7 +33,7 @@ namespace svc.system.center.api.Controllers.V1.Public
         [SwaggerResponse(statusCode: StatusCodes.Status200OK, type: typeof(IEnumerable<GetCountriesDto>))]
         public async Task<IActionResult> GetStates()
         {
-            var list = await _countryRepository.GetListForDropdown();
+            var list = await _stateRepository.GetListForDropdown();
             return SuccessResponseWithoutPagination(list);
         }
     }
