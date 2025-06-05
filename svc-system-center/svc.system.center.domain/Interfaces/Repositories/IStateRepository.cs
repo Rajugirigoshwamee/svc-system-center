@@ -9,4 +9,6 @@ namespace svc.system.center.domain.Interfaces.Repositories;
 public interface IStateRepository : IRepository<States>
 {
     Task<IEnumerable<GetStateDto>> GetList(BaseListRequestDto request);
+
+    Task<IEnumerable<GetStateDto>> GetListForDropdown();
 }

@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using svc.system.center.api.Controllers.Comman;
 using svc.system.center.api.Filters;
-using svc.system.center.data.access.layer.Repository;
 using svc.system.center.domain.Interfaces.Repositories;
-using svc.system.center.domain.Models.Dtos.V1.Public.Country;
 using svc.system.center.domain.Models.Dtos.V1.Public.Master;
 using Swashbuckle.AspNetCore.Annotations;
 
